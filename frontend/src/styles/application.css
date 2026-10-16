@@ -1,0 +1,604 @@
+/* React application states and supporting routes. The main theme is the approved HTML design. */
+.config-fields {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.config-fields:disabled .create-button {
+  transform: none;
+}
+
+.field-error {
+  color: #b64f4f;
+  font-size: 11px;
+  margin: 8px 0 0;
+}
+
+.error-banner {
+  background: #fff0ee;
+  border: 1px solid #f1cfca;
+  color: #a84943;
+  border-radius: 12px;
+  padding: 13px 17px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  font-size: 12px;
+}
+
+.error-banner button {
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: inherit;
+  white-space: nowrap;
+  font-size: 11px;
+}
+
+.mock-options {
+  margin-top: 17px;
+  border-top: 1px solid var(--border);
+  padding-top: 11px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.mock-options summary {
+  cursor: pointer;
+}
+
+.mock-options p {
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+.mock-options code {
+  color: #5b7d80;
+  background: #eff5f5;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.nav-running {
+  color: #80e0dc !important;
+  padding-top: 10px;
+}
+
+.workflow-meter {
+  height: 3px;
+  background: #eff5f5;
+  margin-top: 18px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.workflow-meter span {
+  display: block;
+  height: 100%;
+  background: var(--teal);
+  transition: width 0.5s;
+}
+
+.workflow .progress-detail {
+  border-top: 0;
+  margin-top: 11px;
+  padding-top: 0;
+  align-items: flex-start;
+}
+
+.workflow .progress-detail>span {
+  max-width: 85%;
+}
+
+.workflow .progress-detail strong {
+  white-space: nowrap;
+}
+
+.workflow-status {
+  text-transform: capitalize;
+}
+
+.step.failed .step-circle {
+  background: #fff0ee;
+  color: #bf5b59;
+  border-color: #f1c7c4;
+}
+
+.step.failed .step-label {
+  color: #b55c55;
+}
+
+.job-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 13px;
+  flex-wrap: wrap;
+}
+
+.job-actions .text-button {
+  padding: 6px 10px;
+  font-size: 10px;
+}
+
+.job-id {
+  margin-left: auto;
+  font-family: monospace;
+}
+
+.preview-note {
+  color: #7d989b;
+  font-size: 10px;
+  margin: 0 20px 14px;
+}
+
+.real-video-wrap {
+  padding: 0 18px 18px;
+}
+
+.real-video {
+  display: block;
+  width: 100%;
+  max-height: 540px;
+  background: #103c43;
+  border-radius: 12px;
+}
+
+.artifact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 20px 17px;
+}
+
+.source-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.source-list a {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 10px 0;
+  color: var(--teal);
+}
+
+.preview-card .play-overlay {
+  z-index: 3;
+}
+
+.history-card {
+  overflow: hidden;
+}
+
+.history-job {
+  border-top: 1px solid #edf2f2;
+  display: flex;
+  gap: 17px;
+  align-items: center;
+  background: white;
+  width: 100%;
+  text-align: left;
+  padding: 19px 22px;
+  transition: background 0.2s;
+  color: var(--ink);
+}
+
+.history-job:hover {
+  background: #f5fbfb;
+}
+
+.history-description {
+  flex: 1;
+  min-width: 0;
+}
+
+.history-description strong {
+  display: block;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.history-description small {
+  display: block;
+  color: #8aa0a4;
+  font-size: 10px;
+  margin-top: 3px;
+}
+
+.history-date {
+  font-size: 10px;
+  color: #90a4a6;
+}
+
+.job-badge {
+  font-size: 9px;
+  text-transform: capitalize;
+  background: #f2f7f7;
+  border-radius: 6px;
+  padding: 5px 9px;
+  min-width: 72px;
+  text-align: center;
+}
+
+.status-completed {
+  color: #2e9991;
+}
+
+.status-running,
+.status-queued {
+  color: #379bb1;
+}
+
+.status-failed {
+  color: #ba5b56;
+}
+
+.job-badge.status-failed {
+  background: #fff0ed;
+}
+
+.job-badge.status-completed {
+  background: #eaf8f4;
+}
+
+.status-cancelled {
+  color: #938997;
+}
+
+.pagination {
+  padding: 16px 22px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.empty-state h3 {
+  font-size: 16px;
+  font-weight: 550;
+  margin: 8px 0;
+}
+
+.empty-state p {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.empty-state .text-button {
+  width: fit-content;
+  margin: 20px auto 0;
+}
+
+.loading-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--teal);
+  border-radius: 50%;
+  margin-right: 10px;
+  animation: pulse 1.5s ease infinite;
+}
+
+.route-card {
+  padding: 30px;
+  max-width: 730px;
+}
+
+.route-card h2 {
+  font-size: 20px;
+  margin: 0 0 6px;
+  letter-spacing: -0.5px;
+}
+
+.route-card p {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 0;
+}
+
+.route-card .text-button {
+  width: fit-content;
+}
+
+.route-card .schema {
+  font-size: 12px;
+  gap: 15px;
+  margin-top: 28px;
+}
+
+.profile-hero {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin-bottom: 30px;
+}
+
+.profile-hero .avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  font-size: 20px;
+}
+
+.route-card .modal-note {
+  font-size: 12px;
+  padding: 15px;
+}
+
+.login-layout {
+  min-height: 68vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 50px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.login-intro {
+  padding: 20px;
+}
+
+.login-intro h1 {
+  font-size: 42px;
+  line-height: 1.2;
+  margin: 15px 0;
+  letter-spacing: -1.5px;
+}
+
+.login-intro p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.login-card {
+  padding: 34px;
+}
+
+.login-card h2 {
+  margin: 18px 0 7px;
+  letter-spacing: -0.6px;
+  font-size: 21px;
+}
+
+.login-card p {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.8;
+  margin-bottom: 26px;
+}
+
+.login-card .select {
+  padding: 12px;
+  margin-bottom: 20px;
+  font-size: 12px;
+}
+
+.login-card .create-button {
+  margin-top: 4px;
+}
+
+.login-card .inline-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--teal);
+  margin-top: 24px;
+}
+
+.login-card .inline-link .icon {
+  width: 14px;
+  height: 14px;
+}
+
+.login-orbit {
+  width: 130px;
+  height: 130px;
+  border: 1px solid #b7d9dc;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  position: relative;
+  margin-top: 35px;
+}
+
+.login-orbit:after {
+  content: "";
+  position: absolute;
+  inset: -15px;
+  border: 1px dashed #d5e5e6;
+  border-radius: 50%;
+}
+
+.login-orbit span {
+  color: var(--teal);
+  font-size: 24px;
+  letter-spacing: -1px;
+}
+
+.login-orbit i,
+.login-orbit b {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #b8a8e4;
+  top: 0;
+  right: 13px;
+}
+
+.login-orbit b {
+  width: 15px;
+  height: 15px;
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 17px;
+  background: var(--yellow);
+}
+
+.startup-error {
+  max-width: 650px;
+  margin: 15vh auto;
+  padding: 25px;
+}
+
+.startup-error p {
+  color: var(--muted);
+}
+
+.startup-error button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: var(--teal);
+  color: white;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@media (max-width: 1000px) {
+  .login-layout {
+    gap: 20px;
+  }
+
+  .login-intro h1 {
+    font-size: 32px;
+  }
+
+  .login-card {
+    padding: 25px;
+  }
+
+  .history-date {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .config-fields {
+    width: 100%;
+  }
+
+  .history-job {
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .history-description strong {
+    font-size: 12px;
+  }
+
+  .history-job>.icon {
+    display: none;
+  }
+
+  .job-badge {
+    min-width: 62px;
+    font-size: 8px;
+  }
+
+  .login-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .login-intro {
+    padding: 5px 0;
+  }
+
+  .login-intro h1 {
+    font-size: 29px;
+  }
+
+  .login-orbit {
+    display: none;
+  }
+
+  .login-card {
+    padding: 25px;
+  }
+
+  .route-card {
+    padding: 22px;
+  }
+
+  .route-card h2 {
+    font-size: 18px;
+  }
+
+  .profile-hero {
+    gap: 12px;
+  }
+
+  .profile-hero .avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+
+  .error-banner {
+    font-size: 11px;
+  }
+
+  .workflow .progress-detail {
+    font-size: 9px;
+  }
+}
+
+body {
+  font-size: 16px;
+}
+
+.nav-link span {
+  font-size: 15px;
+}
+
+.subtitle,
+.section-copy {
+  font-size: 14px;
+}
+
+.card-title,
+.panel-top .card-title {
+  font-size: 16px;
+}
+
+.field-label,
+.input-wrap input,
+.select,
+.voice-option select,
+.create-button,
+.text-button {
+  font-size: 14px;
+}
+
+.output-option,
+.segment,
+.tab,
+.export-button {
+  font-size: 13px;
+}
+
+.step-label,
+.workflow-status,
+.workflow .progress-detail {
+  font-size: 12px;
+}
