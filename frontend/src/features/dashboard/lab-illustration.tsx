@@ -1,205 +1,99 @@
-export function LabIllustration() {
+/** Decorative, original SVG artwork. Kept as SVG so it stays sharp in all aspect ratios. */
+export function LabIllustration({ className = "" }: { className?: string }) {
     return (
         <svg
-            className="lab-illustration"
-            viewBox="0 0 450 340"
-            fill="none"
-            aria-label="Illustration of laboratory glassware with teal and purple liquids"
+            viewBox="0 0 640 360"
+            preserveAspectRatio="xMidYMid meet"
+            className={`lab-illustration ${className}`.trim()}
             role="img"
+            aria-label="A midnight chemistry laboratory with softly glowing colorful flasks and a microscope"
+            xmlns="http://www.w3.org/2000/svg"
         >
             <defs>
-                <linearGradient
-                    id="glass"
-                    x1="100"
-                    y1="100"
-                    x2="300"
-                    y2="300"
-                    gradientUnits="userSpaceOnUse"
-                >
-                    <stop stopColor="#b9f7f7" stopOpacity=".17" />
-                    <stop offset="1" stopColor="#a8f4f4" stopOpacity=".04" />
+                <linearGradient id="midnight-bench" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stopColor="#48b9ef" />
+                    <stop offset="1" stopColor="#274fbc" />
                 </linearGradient>
-                <linearGradient
-                    id="liquid"
-                    x1="220"
-                    y1="200"
-                    x2="270"
-                    y2="300"
-                    gradientUnits="userSpaceOnUse"
-                >
-                    <stop stopColor="#39c5d3" />
-                    <stop offset="1" stopColor="#10929f" />
+                <linearGradient id="midnight-glass" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stopColor="#f9f3ff" stopOpacity=".28" />
+                    <stop offset="1" stopColor="#d6c3ff" stopOpacity=".09" />
                 </linearGradient>
-                <linearGradient
-                    id="purple"
-                    x1="80"
-                    y1="180"
-                    x2="180"
-                    y2="270"
-                    gradientUnits="userSpaceOnUse"
-                >
-                    <stop stopColor="#bda6ee" />
-                    <stop offset="1" stopColor="#8772c2" />
+                <linearGradient id="midnight-beam" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stopColor="#4bc9ec" stopOpacity=".12" />
+                    <stop offset="1" stopColor="#4bc9ec" stopOpacity="0" />
                 </linearGradient>
-                <radialGradient id="aura">
-                    <stop stopColor="#63d4db" stopOpacity=".12" />
-                    <stop offset="1" stopColor="#63d4db" stopOpacity="0" />
+                <radialGradient id="midnight-halo">
+                    <stop offset="0" stopColor="#7b6acc" stopOpacity=".14" />
+                    <stop offset="1" stopColor="#7b6acc" stopOpacity="0" />
                 </radialGradient>
             </defs>
-            <circle cx="243" cy="185" r="142" fill="url(#aura)" />
-            <ellipse
-                cx="240"
-                cy="304"
-                rx="155"
-                ry="9"
-                fill="#062c36"
-                fillOpacity=".45"
-            />
-            <g className="molecule" opacity=".7">
-                <path
-                    d="m275 66 37-23 39 22v44l-39 23-37-23zM351 65l32-16M312 132v28"
-                    stroke="#55c2cd"
-                    strokeOpacity=".25"
-                />
-                <circle cx="275" cy="66" r="6" fill="#73d6dc" />
-                <circle cx="312" cy="43" r="9" fill="#b7a4e5" />
-                <circle cx="351" cy="65" r="5" fill="#66c9d3" />
-                <circle cx="351" cy="109" r="8" fill="#66c9d3" />
-                <circle cx="312" cy="132" r="5" fill="#b7a4e5" />
-                <circle cx="383" cy="49" r="4" fill="#e8cf85" />
-                <circle cx="312" cy="160" r="4" fill="#5bbbc6" />
+
+            {/* Quiet details on the far wall, behind the lab bench. */}
+            <ellipse cx="467" cy="220" rx="190" ry="160" fill="url(#midnight-halo)" />
+            <rect x="392" y="131" width="193" height="78" rx="7" fill="#59359a" opacity=".32" />
+            <path d="M403 168h172" stroke="#9270d1" strokeOpacity=".26" strokeWidth="3" />
+            <path d="M423 132v-17h10v17m54 0v-29h12v29m48 0v-22h9v22" fill="none" stroke="#9270d1" strokeOpacity=".22" strokeWidth="3" />
+            <circle cx="600" cy="117" r="3" fill="#e2ccff" opacity=".18" />
+            <circle cx="330" cy="182" r="4" stroke="#dfcfff" strokeOpacity=".2" />
+
+            {/* Diffuse cyan ceiling lamp: no bright glow filter. */}
+            <path d="M372 7h158l79 278H288z" fill="url(#midnight-beam)" />
+            <rect x="379" y="0" width="145" height="8" rx="4" fill="#39bce4" />
+            <path d="M386 10h132" stroke="#84e4f7" strokeOpacity=".42" strokeWidth="2" />
+
+            {/* Blue laboratory table. The equipment sits above it. */}
+            <rect x="253" y="294" width="380" height="17" rx="5" fill="url(#midnight-bench)" />
+            <rect x="265" y="310" width="363" height="40" rx="3" fill="#223c9a" opacity=".83" />
+            <path d="M261 296h364" stroke="#96e3ff" strokeWidth="2" strokeOpacity=".45" />
+
+            {/* Pink Erlenmeyer flask. */}
+            <g transform="translate(272 199)">
+                <path d="M31 5h18v31l28 57a9 9 0 0 1-8 13H11a9 9 0 0 1-8-13l28-57z" fill="url(#midnight-glass)" stroke="#e0d3ff" strokeOpacity=".8" strokeWidth="2" />
+                <path d="M17 72h46l17 27a6 6 0 0 1-6 7H7a6 6 0 0 1-5-7z" fill="#f875b0" />
+                <path d="M32 9v27l-19 39" fill="none" stroke="#fff" strokeOpacity=".34" strokeWidth="3" strokeLinecap="round" />
+                <path d="M30 5h21" stroke="#ede0ff" strokeWidth="4" strokeLinecap="round" />
+                <circle cx="31" cy="91" r="3" fill="#ffe7f3" opacity=".68" />
             </g>
-            <path
-                d="M225 66v231M217 66h16M195 297h61"
-                stroke="#7db4b7"
-                strokeWidth="5"
-                strokeLinecap="round"
-            />
-            <path d="M224 124h-61M224 192h90" stroke="#59898c" strokeWidth="5" />
-            <rect
-                x="217"
-                y="118"
-                width="15"
-                height="13"
-                rx="2"
-                fill="#143a42"
-                stroke="#78a7aa"
-            />
-            <rect
-                x="217"
-                y="186"
-                width="15"
-                height="13"
-                rx="2"
-                fill="#143a42"
-                stroke="#78a7aa"
-            />
-            <path
-                d="M134 106h32m-27 0v45l-38 66c-4 7 0 13 8 13h82c8 0 12-6 8-13l-38-66v-45"
-                fill="url(#glass)"
-                stroke="#b6e5e7"
-                strokeWidth="2.2"
-            />
-            <path
-                d="m119 187-17 31c-2 4 0 7 5 7h86c4 0 6-3 4-7l-17-31c-20 9-40-8-61 0"
-                fill="url(#purple)"
-                fillOpacity=".92"
-            />
-            <path
-                d="m120 188 17-31v-42M108 218h3"
-                stroke="#e0ffff"
-                strokeOpacity=".5"
-                strokeWidth="2"
-                strokeLinecap="round"
-            />
-            <path
-                d="M132 106h36"
-                stroke="#9bc6c9"
-                strokeWidth="5"
-                strokeLinecap="round"
-            />
-            <rect x="138" y="97" width="24" height="8" rx="2" fill="#c4e4e2" />
-            <circle className="bubble" cx="144" cy="215" r="3" fill="#e9e3ff" />
-            <circle className="bubble b2" cx="165" cy="211" r="2" fill="#e9e3ff" />
-            <circle className="bubble b3" cx="152" cy="205" r="4" fill="#d7cbfa" />
-            <path
-                d="M288 150h37m-33 0v62c-19 10-30 27-30 43a45 45 0 0 0 90 0c0-16-11-33-31-43v-62"
-                fill="url(#glass)"
-                stroke="#a6e0e3"
-                strokeWidth="2.3"
-            />
-            <path d="M267 248c15-10 42 9 80 0a40 40 0 1 1-80 0" fill="url(#liquid)" />
-            <path
-                d="M294 160v58c-11 6-23 21-24 27"
-                stroke="#dcffff"
-                strokeWidth="2.4"
-                strokeLinecap="round"
-                strokeOpacity=".55"
-            />
-            <path
-                d="M286 149h41"
-                stroke="#b3dedf"
-                strokeWidth="6"
-                strokeLinecap="round"
-            />
-            <rect x="292" y="137" width="29" height="10" rx="2" fill="#cceceb" />
-            <path
-                d="M282 263a24 24 0 0 0 11 14"
-                stroke="#a6f2f1"
-                strokeOpacity=".3"
-                strokeWidth="3"
-                strokeLinecap="round"
-            />
-            <circle className="bubble b3" cx="310" cy="276" r="3" fill="#9aeeec" />
-            <circle className="bubble" cx="296" cy="265" r="2.5" fill="#9aeeec" />
-            <circle className="bubble b2" cx="321" cy="270" r="4" fill="#9aeeec" />
-            <path
-                d="M173 248v43a9 9 0 0 0 18 0v-43"
-                stroke="#a3d2d5"
-                strokeWidth="2"
-                fill="url(#glass)"
-            />
-            <path d="M176 274v17a6 6 0 0 0 12 0v-17" fill="#ecc56e" />
-            <path
-                d="M169 247h26"
-                stroke="#c1dfdf"
-                strokeWidth="3"
-                strokeLinecap="round"
-            />
-            <path
-                d="M135 258v34a9 9 0 0 0 18 0v-34"
-                stroke="#a3d2d5"
-                strokeWidth="2"
-                fill="url(#glass)"
-            />
-            <path d="M138 279v13a6 6 0 0 0 12 0v-13" fill="#d19ab9" />
-            <path
-                d="M132 257h24"
-                stroke="#c1dfdf"
-                strokeWidth="3"
-                strokeLinecap="round"
-            />
-            <path
-                d="M126 274h75M129 274v28M198 274v28M124 303h80"
-                stroke="#427e86"
-                strokeWidth="4"
-                strokeLinecap="round"
-            />
-            <path
-                d="M91 299h293"
-                stroke="#6eabad"
-                strokeOpacity=".35"
-                strokeWidth="2"
-                strokeLinecap="round"
-            />
-            <path
-                d="M87 110h22m-11-11v22M367 205h15m-7.5-7.5v15"
-                stroke="#73aeb1"
-                strokeOpacity=".4"
-                strokeWidth="1.5"
-            />
-            <circle cx="380" cy="163" r="3" fill="#ad9cce" fillOpacity=".5" />
-            <circle cx="98" cy="167" r="2" fill="#b6dfdb" fillOpacity=".5" />
+
+            {/* Green round flask, bubbles and a little vapor. */}
+            <g transform="translate(359 170)">
+                <path d="M30 4h17v36a47 47 0 1 1-17 0z" fill="url(#midnight-glass)" stroke="#e3d6ff" strokeOpacity=".86" strokeWidth="2" />
+                <path d="M-6 83c25-9 60 7 89 0a45 45 0 0 1-89 0" fill="#8aec79" />
+                <rect x="30" y="4" width="17" height="34" rx="3" fill="#bcb0f7" opacity=".23" />
+                <path d="M29 4h19" stroke="#e0d6ff" strokeWidth="3" strokeLinecap="round" />
+                <circle cx="18" cy="99" r="5" fill="#efffe7" opacity=".5" />
+                <circle cx="45" cy="91" r="3" fill="#efffe7" opacity=".6" />
+                <circle className="bubble" cx="33" cy="70" r="4" fill="none" stroke="#f4ffe9" strokeOpacity=".55" strokeWidth="1.5" />
+                <path d="M33-9q-12-11-2-24t1-24" fill="none" stroke="#9e98ed" strokeOpacity=".55" strokeWidth="3" strokeLinecap="round" />
+            </g>
+
+            {/* Pastel-blue microscope. */}
+            <g transform="translate(450 198)">
+                <path d="M5 95h87v10H5z" fill="#7b86ea" />
+                <path d="M44 91c-24-11-32-32-18-60l13 7c-9 26-5 35 20 45z" fill="#7f90f0" />
+                <path d="M57 72h25v7H57z" fill="#4c57ad" />
+                <rect x="25" y="4" width="19" height="59" rx="5" fill="#b3b8ff" transform="rotate(-16 34 35)" />
+                <circle cx="17" cy="49" r="6" fill="#6979dd" />
+                <path d="M17 95h52" stroke="#c3c8ff" strokeOpacity=".45" strokeWidth="2" />
+            </g>
+
+            {/* Test flask held above a tiny burner. */}
+            <g transform="translate(523 176)">
+                <path d="M49 8v118M10 128h77" stroke="#160e37" strokeWidth="4" strokeLinecap="round" />
+                <path d="M10 22h43" stroke="#a08ae0" strokeWidth="3" strokeLinecap="round" />
+                <path d="M15 37h22v23l18 45a8 8 0 0 1-7 11H5a8 8 0 0 1-7-11l17-45z" fill="url(#midnight-glass)" stroke="#e1d3ff" strokeOpacity=".8" strokeWidth="2" />
+                <path d="M6 89h43l6 18a7 7 0 0 1-7 9H4a7 7 0 0 1-7-9z" fill="#82df8b" />
+                <ellipse cx="28" cy="137" rx="19" ry="7" fill="#9f80ea" />
+                <path d="M28 111c-9 12-7 20 0 24 9-8 9-15 0-24z" fill="#ffcb68" opacity=".85" />
+            </g>
+
+            {/* Yellow round flask at the end of the bench. */}
+            <g transform="translate(586 241)">
+                <rect x="16" y="2" width="16" height="28" rx="3" fill="url(#midnight-glass)" stroke="#e5d6ff" strokeOpacity=".85" strokeWidth="2" />
+                <circle cx="24" cy="66" r="35" fill="url(#midnight-glass)" stroke="#e5d6ff" strokeOpacity=".85" strokeWidth="2" />
+                <path d="M-11 66a35 35 0 0 0 70 0z" fill="#ffd267" />
+                <circle cx="8" cy="52" r="3" fill="#fff" opacity=".3" />
+            </g>
         </svg>
     );
 }

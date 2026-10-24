@@ -40,7 +40,8 @@ export function WorkflowProgress() {
                         key={step}
                         className={`step ${active && n === index ? "active" : ""} ${job?.status === "completed" || (n < index && Boolean(job)) ? "done" : ""} ${job?.status === "failed" && n === index ? "failed" : ""}`}
                     >
-                        <span className="step-circle">
+                        <span className={`step-circle workflow__step ${job?.status === "completed" || (n < index && Boolean(job)) ? "workflow__step--done" : active && n === index ? "workflow__step--active" : ""}`}>
+                            <span className="workflow__liquid" aria-hidden="true" />
                             <Icon name={icons[n]} />
                         </span>
                         <span className="step-label">{stepLabels[n]}</span>

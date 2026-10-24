@@ -49,8 +49,8 @@ export function AppShell() {
                         <Icon name="flask" />
                     </div>
                     <div>
-                        <strong>Chemistry</strong>
-                        <span>VIDEO STUDIO</span>
+                        <strong className="sidebar__brand-title">Chemistry</strong>
+                        <span className="sidebar__brand-sub">VIDEO STUDIO</span>
                     </div>
                 </Link>
                 <div className="nav-label">WORKSPACE</div>
@@ -61,7 +61,7 @@ export function AppShell() {
                             to={item.to}
                             end={item.to === "/"}
                             className={({ isActive }) =>
-                                `nav-link ${isActive ? "active" : ""}`
+                                `nav-link nav-item ${isActive ? "active nav-item--active" : ""}`
                             }
                             title={item.label}
                         >

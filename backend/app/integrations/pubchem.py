@@ -1,24 +1,11 @@
 import sys
 import urllib.parse
 from pathlib import Path
-
-# Đảm bảo import được package `app` dù chạy file từ bất kỳ thư mục nào
-_backend_dir = str(Path(__file__).resolve().parents[2])
-if _backend_dir not in sys.path:
-    sys.path.insert(0, _backend_dir)
-
-import httpx  # noqa: E402
-from app.schemas import ChemicalCandidate  # noqa: E402
+import httpx
+from app.schemas import ChemicalCandidate
 
 
 class PubChemClient:
-    """Client giao tiếp với PubChem PUG REST API.
-    
-    Tài liệu tham khảo:
-    - PUG REST Specification: https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest
-    - PUG REST Tutorial: https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest-tutorial
-    """
-
     def __init__(
         self,
         base_url: str = "https://pubchem.ncbi.nlm.nih.gov/rest/pug",
@@ -31,9 +18,7 @@ class PubChemClient:
         }
 
     def search_candidates(self, query: str) -> list[ChemicalCandidate]:
-        """Tìm kiếm các hợp chất hóa học theo tên hoặc công thức từ PubChem.
-
-        Sử dụng PUG REST Property Table Endpoint:
+        """PUG REST Property Table Endpoint:
         /compound/name/{query}/property/{proptags}/JSON
         """
         clean_query = query.strip()
@@ -62,7 +47,7 @@ class PubChemClient:
             if not cid:
                 continue
 
-            # PubChem có thể trả về SMILES, CanonicalSMILES hoặc ConnectivitySMILES (đặc biệt cho đơn chất như Al)
+            # PubChem return SMILES, CanonicalSMILES or ConnectivitySMILES 
             smiles = (
                 item.get("ConnectivitySMILES")
                 or item.get("CanonicalSMILES")
@@ -83,12 +68,6 @@ class PubChemClient:
         return candidates
 
     def get_compound_data(self, cid: int) -> dict:
-        """Lấy thông tin thuộc tính chi tiết và mô tả của chất theo PubChem CID.
-
-        Sử dụng PUG REST endpoints:
-        - /compound/cid/{cid}/property/{proptags}/JSON
-        - /compound/cid/{cid}/description/JSON
-        """
         if cid <= 0:
             return {}
 
@@ -146,23 +125,22 @@ class PubChemClient:
 if __name__ == "__main__":
     import sys
 
-    # Dam bao xuat duoc tieng Viet tren terminal Windows
     if sys.stdout.encoding.lower() != "utf-8":
         sys.stdout.reconfigure(encoding="utf-8")
 
     client = PubChemClient()
 
-    print("--- 1. Tim kiem chat 'Al' (Nhom) ---")
+    print("--- 1. Searching 'Al' ---")
     candidates = client.search_candidates("AL")
     for c in candidates:
-        print(f"CID: {c.cid} | Ten: {c.name} | Cong thuc: {c.formula} | SMILES: {c.smiles}")
+        print(f"CID: {c.cid} | Name: {c.name} | Formula: {c.formula} | SMILES: {c.smiles}")
 
     if candidates:
         al_cid = candidates[0].cid
-        print(f"\n--- 2. Lay du lieu chi tiet cua CID: {al_cid} ---")
+        print(f"\n--- 2. Get detailed data of CID: {al_cid} ---")
         details = client.get_compound_data(al_cid)
         for key, val in details.items():
             if key == "descriptions":
-                print(f"descriptions: {val[:2]}... (Tong cong {len(val)} muc)")
+                print(f"descriptions: {val[:2]}... (Total {len(val)} items)")
             else:
                 print(f"{key}: {val}")

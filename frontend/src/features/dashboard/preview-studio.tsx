@@ -140,9 +140,16 @@ export function PreviewStudio() {
                     <div className="preview-wrap">
                         <div
                             ref={stageRef}
-                            className={`video-stage ${currentConfig.aspect_ratio === "9:16" ? "vertical" : currentConfig.aspect_ratio === "1:1" ? "square" : ""} ${playing ? "playing" : ""}`}
+                            className={`video-stage stage ${currentConfig.aspect_ratio === "9:16" ? "vertical" : currentConfig.aspect_ratio === "1:1" ? "square" : ""} ${playing ? "playing" : ""}`}
                         >
                             <div className="stage-grid" />
+
+                            <span className="stage-bubble stage-bubble--one" aria-hidden="true" />
+                            <span className="stage-bubble stage-bubble--two" aria-hidden="true" />
+                            <span className="stage-bubble stage-bubble--three" aria-hidden="true" />
+                            <span className="stage-bubble stage-bubble--four" aria-hidden="true" />
+                            <span className="stage-bubble stage-bubble--five" aria-hidden="true" />
+                            <span className="stage-bubble stage-bubble--six" aria-hidden="true" />
                             <div className="stage-label">
                                 <i className="status-dot" />
                                 CHEMISTRY IN MOTION
