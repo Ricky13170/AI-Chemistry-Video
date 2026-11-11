@@ -13,8 +13,8 @@ def fake_client():
 def service(fake_client):
     return ChemicalService(pubchem_client=fake_client)
 
-def test_search_chemical(service, fake_client):
-    fake_client.search_candidate.return_value = [
+def test_search_chemicals(service, fake_client):
+    fake_client.search_candidates.return_value = [
         {
             "CID": 702,
             "IUPACName": "ethanol",
@@ -32,7 +32,7 @@ def test_search_chemical(service, fake_client):
         search_type="formula",
     )
 
-    results = service.search_chemical(request)
+    results = service.search_chemicals(request)
 
     assert len(results) == 2
     assert all(
@@ -42,17 +42,17 @@ def test_search_chemical(service, fake_client):
     assert results[0].cid == 702
     assert results[1].cid == 8254
 
-    fake_client.search_candidate.assert_called_once_with(
+    fake_client.search_candidates.assert_called_once_with(
         query="C2H6O",
         search_type=request.search_type,
     )
 
 def test_search_chemical_empty(service, fake_client):
-    fake_client.search_candidate.return_value = []
+    fake_client.search_candidates.return_value = []
 
     request = ChemicalSearchRequest(query="UnknownChemical")
 
-    results = service.search_chemical(request)
+    results = service.search_chemicals(request)
 
     assert results == []
 
@@ -111,3 +111,43 @@ def test_provider_error_propagates(service, fake_client):
 
     with pytest.raises(ChemistryProviderError):
         service.get_chemical(702)
+
+
+def test_search_skips_candidates_without_name(service, fake_client):
+    fake_client.search_candidates.return_value = [
+        {
+            "CID": 947,
+            "IUPACName": "molecular nitrogen",
+            "MolecularFormula": "N2",
+        },
+        {
+            "CID": 12195976,
+            "MolecularFormula": "N2",
+        },
+        {
+            "CID": 71309542,
+            "MolecularFormula": "N2",
+        },
+    ]
+
+    request = ChemicalSearchRequest(query="N2", search_type="formula")
+    results = service.search_chemicals(request)
+
+    assert len(results) == 1
+    assert results[0].cid == 947
+    assert results[0].name == "molecular nitrogen"
+
+
+def test_search_all_candidates_invalid(service, fake_client):
+    fake_client.search_candidates.return_value = [
+        {
+            "CID": 12195976,
+            "MolecularFormula": "N2",
+        }
+    ]
+
+    request = ChemicalSearchRequest(query="N2", search_type="formula")
+
+    with pytest.raises(ChemicalDataError):
+        service.search_chemicals(request)
+

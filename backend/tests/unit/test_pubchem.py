@@ -27,7 +27,7 @@ def test_search_candidates_by_name(monkeypatch, client):
     monkeypatch.setattr(pcp, "get_cids", fake_get_cids)
     monkeypatch.setattr(pcp, "get_properties", fake_get_properties)
 
-    result = client.search_candidate(
+    result = client.search_candidates(
         "Ethanol",
         ChemicalSearchType.NAME,
     )
@@ -52,7 +52,7 @@ def test_search_candidates_by_formula(monkeypatch, client):
     monkeypatch.setattr(pcp, "get_cids", fake_get_cids)
     monkeypatch.setattr(pcp, "get_properties", fake_get_properties)
 
-    result = client.search_candidate(
+    result = client.search_candidates(
         "C2H6O",
         ChemicalSearchType.FORMULA,
     )
@@ -86,7 +86,7 @@ def test_search_candidates_not_found(monkeypatch, client):
         lambda *args, **kwargs: [],
     )
 
-    result = client.search_candidate("UnknownChemical")
+    result = client.search_candidates("UnknownChemical")
 
     assert result == []
 
@@ -108,4 +108,4 @@ def test_pubchem_provider_error(monkeypatch, client):
     monkeypatch.setattr(pcp, "get_cids", fake_get_cids)
 
     with pytest.raises(ChemistryProviderError):
-        client.search_candidate("Ethanol")
+        client.search_candidates("Ethanol")

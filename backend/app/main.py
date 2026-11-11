@@ -1,4 +1,3 @@
-"""Khởi tạo FastAPI app."""
 from fastapi import FastAPI
 
 from app.api.router import router
